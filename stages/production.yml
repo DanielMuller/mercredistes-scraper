@@ -1,5 +1,6 @@
 profile: mesphotos
 region: eu-central-1
+extension: ""
 ## Add any additional stage related variables. You can re-use the definition in serverless.yml:custom
 # customStageVar: customStageValue
 ## Default Lambda related configs. Can be overwritten in each function

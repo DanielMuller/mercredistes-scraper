@@ -1,5 +1,5 @@
 handler: services/addContent.handler
-name: ${self:service}-addContent
+name: ${self:service}-addContent${self:custom.stage.extension}
 memorySize: ${self:custom.stage.lambda.memorySize}
 timeout: ${self:custom.stage.lambda.timeout}
 events:

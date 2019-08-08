@@ -13,8 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "aws-sdk": "^2.504.0",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-source-map-support": "^2.1.1",
     "babel-preset-env": "^1.7.0",
@@ -33,6 +33,12 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "lambda-log": "^2.3.0"
+    "diff": "^4.0.1",
+    "got": "^9.6.0",
+    "image-downloader": "^3.5.0",
+    "lambda-git": "^0.1.2",
+    "lambda-log": "^2.3.0",
+    "metascraper": "^5.6.5",
+    "metascraper-image": "^5.6.5"
   }
 }

@@ -25,7 +25,12 @@ provider:
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
   environment:
-    SERVERLESS_REGION: ${self:provider.region}
+    GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token}
+    GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token}
+    GITHUB_USERNAME: DanielMuller
+    GITHUB_REPO: mercredistes.mesphotos.ch
+    GITHUB_COMMIT_EMAIL: mercredistes-scraper@mesphotos.ch
+    GITHUB_COMMIT_USER: Mercredistes Scraper
 
 functions: ${file(lib/config.js):functions}
 # resources:

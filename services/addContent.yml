@@ -2,6 +2,8 @@ handler: services/addContent.handler
 name: ${self:service}-addContent${self:custom.stage.extension}
 memorySize: ${self:custom.stage.lambda.memorySize}
 timeout: ${self:custom.stage.lambda.timeout}
+layers:
+  - arn:aws:lambda:eu-central-1:553035198032:layer:git:6
 events:
   - schedule:
       rate: rate(1 day)

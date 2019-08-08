@@ -2,3 +2,9 @@ handler: services/addContent.handler
 name: ${self:service}-addContent
 memorySize: ${self:custom.stage.lambda.memorySize}
 timeout: ${self:custom.stage.lambda.timeout}
+events:
+  - schedule:
+      rate: rate(1 day)
+      enabled: true
+      input:
+        year: "2019"

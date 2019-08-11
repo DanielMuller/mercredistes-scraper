@@ -43,7 +43,8 @@ const noChanges = (state) => {
 }
 
 const fetchPreviousList = (year) => {
-  const currentVersionUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/master/data/${year}.json`
+  const commit = 'master'
+  const currentVersionUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${commit}/data/${year}.json`
   return got(currentVersionUrl, { json: true })
     .then(res => res.body)
     .then(data => {

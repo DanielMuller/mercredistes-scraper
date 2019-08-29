@@ -60,8 +60,8 @@ const diffVersions = (state) => {
   const previousItems = Object.keys(state.previousList).sort()
   const newItems = Object.keys(state.newList).sort()
   const changes = jsDiff.diffArrays(previousItems, newItems)
-  state.diff['added'] = [].concat(...changes.filter(item => item.added === true).map(item => item.value))
-  state.diff['removed'] = [].concat(...changes.filter(item => item.removed === true).map(item => item.value))
+  state.diff.added = [].concat(...changes.filter(item => item.added === true).map(item => item.value))
+  state.diff.removed = [].concat(...changes.filter(item => item.removed === true).map(item => item.value))
   return state
 }
 

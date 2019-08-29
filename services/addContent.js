@@ -52,12 +52,6 @@ const fetchPreviousList = (year) => {
       data.forEach(item => {
         indexedData[item.url] = item
       })
-      indexedData['test'] = {
-        date: '2017-01-01',
-        name: 'Testing',
-        url: 'https://willy.mesphotos.ch/albums/blatten-riederalp-passerelle-belalp-randa-passerelle/',
-        photographer: 'John Doe'
-      }
       return indexedData
     })
 }

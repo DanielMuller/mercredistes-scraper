@@ -32,6 +32,7 @@ provider:
     GITHUB_COMMIT_EMAIL: mercredistes-scraper@mesphotos.ch
     GITHUB_COMMIT_USER: Mercredistes Scraper
     stage: ${opt:stage, self:provider.stage}
+    default_photographer: William Baehler
 
 functions: ${file(lib/config.js):functions}
 # resources:

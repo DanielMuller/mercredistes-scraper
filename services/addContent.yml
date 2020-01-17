@@ -9,4 +9,4 @@ events:
       rate: cron(25 4 * * ? *)
       enabled: true
       input:
-        year: "2019"
+        year: "2020"

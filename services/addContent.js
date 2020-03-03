@@ -45,8 +45,7 @@ const noChanges = (state) => {
 const fetchPreviousList = (year) => {
   const commit = 'master'
   const currentVersionUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${commit}/data/${year}.json`
-  return got(currentVersionUrl, { json: true })
-    .then(res => res.body)
+  return got(currentVersionUrl).json()
     .then(data => {
       const indexedData = {}
       data.forEach(item => {

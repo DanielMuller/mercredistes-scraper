@@ -24,6 +24,24 @@ provider:
   # iamRoleStatements: ${file(config/iamRoleStatements.yml)}
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
+    tags:
+      Name: mercredistes-scraper
+      billing_entity: daniel
+      role: content
+      project: mercredistes.mesphotos.ch
+      service: deployment
+  stackTags:
+    Name: mercredistes-scraper
+    billing_entity: daniel
+    role: content
+    project: mercredistes.mesphotos.ch
+    service: stack
+  tags:
+    Name: mercredistes-scraper
+    billing_entity: daniel
+    role: content
+    project: mercredistes.mesphotos.ch
+    service: cronjob
   environment:
     GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token}
     GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token}

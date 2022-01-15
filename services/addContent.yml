@@ -10,3 +10,14 @@ events:
       enabled: true
       input:
         year: "2021"
+environment:
+  GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token}
+  GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token}
+  GITHUB_USERNAME: DanielMuller
+  GITHUB_REPO: mercredistes.mesphotos.ch
+  GITHUB_COMMIT_EMAIL: mercredistes-scraper@mesphotos.ch
+  GITHUB_COMMIT_USER: Mercredistes Scraper
+  stage: ${opt:stage, self:provider.stage}
+  default_photographer: William Baehler
+tags:
+  service: cronjob

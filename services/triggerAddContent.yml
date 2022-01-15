@@ -1,0 +1,13 @@
+handler: services/triggerAddContent.handler
+name: ${self:service}-triggerAddContent${self:custom.stage.extension}
+memorySize: 128
+timeout: 10
+environment:
+  year: 2022
+  functionName: ${self:service}-addContent${self:custom.stage.extension}
+tags:
+  service: api
+events:
+  - httpApi:
+      method: GET
+      path: /build

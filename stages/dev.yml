@@ -7,4 +7,4 @@ extension: "-dev"
 lambda:
   memorySize: 2048
   timeout: 900
-  logRetention: "1"
+  logRetention: 1

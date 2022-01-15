@@ -19,10 +19,13 @@ provider:
   name: aws
   lambdaHashingVersion: 20201221
   runtime: nodejs14.x
+  logRetentionInDays: ${self:custom.stage.lambda.logRetention}
+  httpApi:
+    useProviderTags: true
   stage: dev
   region: ${opt:region, self:custom.stage.region}
   profile: ${self:custom.stage.profile}
-  # iamRoleStatements: ${file(config/iamRoleStatements.yml)}
+  iamRoleStatements: ${file(config/iamRoleStatements.yml)}
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
     tags:
@@ -37,21 +40,6 @@ provider:
     role: content
     project: mercredistes.mesphotos.ch
     service: stack
-  tags:
-    Name: mercredistes-scraper
-    billing_entity: daniel
-    role: content
-    project: mercredistes.mesphotos.ch
-    service: cronjob
-  environment:
-    GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token}
-    GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token}
-    GITHUB_USERNAME: DanielMuller
-    GITHUB_REPO: mercredistes.mesphotos.ch
-    GITHUB_COMMIT_EMAIL: mercredistes-scraper@mesphotos.ch
-    GITHUB_COMMIT_USER: Mercredistes Scraper
-    stage: ${opt:stage, self:provider.stage}
-    default_photographer: William Baehler
 
 functions: ${file(lib/config.js):functions}
 # resources:

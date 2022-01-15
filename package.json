@@ -27,7 +27,6 @@
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.20",
     "serverless": "^2.71.0",
-    "serverless-pseudo-parameters": "^2.6.1",
     "serverless-webpack": "^5.6.0",
     "webpack": "^5.66.0",
     "webpack-node-externals": "^3.0.0"

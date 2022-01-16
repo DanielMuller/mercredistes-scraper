@@ -9,13 +9,14 @@ exports.handler = async function (event, context) {
   if (!event.queryStringParameters.token) {
     return redirectResponse(event)
   }
-  if (event.requestContext.timeEpoch - parseInt(event.queryStringParameters.token) > 1000) {
+  if (event.requestContext.timeEpoch - parseInt(event.queryStringParameters.token) > 2000) {
     return {
-      statusCode: 403,
+      statusCode: 400,
       headers: {
-        'content-type': 'text/plain'
+        'content-type': 'text/html; charset=utf-8',
+        'cache-control': 'max-age=604800'
       },
-      body: 'Access Denied'
+      invalidRequest
     }
   }
   const payload = {
@@ -32,11 +33,29 @@ exports.handler = async function (event, context) {
   return {
     statusCode: 202,
     headers: {
-      'content-type': 'text/html; charset=utf-8'
+      'content-type': 'text/html; charset=utf-8',
+      'cache-control': 'no-cache'
     },
     body
   }
 }
+
+const invalidRequest = `<html>
+<head>
+  <title>Requête invalide</title>
+<style>
+html {
+  font-size:2em;
+  margin: 2em;
+}
+</style>
+</head>
+<body>
+La requête n'est plus valable.<br>
+Veuillez ouvrir le lien original à nouveau.
+</body>
+</html>
+`
 
 const body = `<html>
 <head>

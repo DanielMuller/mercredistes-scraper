@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "diff": "^5.0.0",
-    "got": "^11.7.0",
+    "got": "^11.8.5",
     "image-downloader": "^4.0.1",
     "lambda-log": "^2.4.0",
     "metascraper": "^5.14.14",

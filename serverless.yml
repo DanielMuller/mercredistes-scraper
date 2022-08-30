@@ -1,5 +1,5 @@
 service: mercredistes-scraper
-frameworkVersion: ">=2.0.0 <3.0.0"
+frameworkVersion: "3.22.0"
 variablesResolutionMode: 20210326
 
 custom:
@@ -18,7 +18,7 @@ package:
 provider:
   name: aws
   lambdaHashingVersion: 20201221
-  runtime: nodejs14.x
+  runtime: nodejs16.x
   logRetentionInDays: ${self:custom.stage.lambda.logRetention}
   httpApi:
     useProviderTags: true

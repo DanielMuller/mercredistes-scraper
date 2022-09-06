@@ -1,18 +1,18 @@
 'use strict'
 
-const fs = require('fs')
-const got = require('got')
-const listing = require('../lib/listing')
-const debug = require('../lib/debug') // eslint-disable-line no-unused-vars
-const jsDiff = require('diff')
-const doChanges = require('../lib/changes')
+import { writeFile } from 'fs'
+import got from 'got'
+import listing from '../lib/listing'
+import debug from '../lib/debug' // eslint-disable-line no-unused-vars
+import { diffArrays } from 'diff'
+import doChanges from '../lib/changes'
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME
 const GITHUB_REPO = process.env.GITHUB_REPO
 
-module.exports.handler = async (event) => {
+export async function handler (event) {
   const year = parseInt(event.year)
   const state = {
-    year: year,
+    year,
     previousList: {},
     newList: {},
     diff: {}
@@ -58,7 +58,7 @@ const fetchPreviousList = (year) => {
 const diffVersions = (state) => {
   const previousItems = Object.keys(state.previousList).sort()
   const newItems = Object.keys(state.newList).sort()
-  const changes = jsDiff.diffArrays(previousItems, newItems)
+  const changes = diffArrays(previousItems, newItems)
   state.diff.added = [].concat(...changes.filter(item => item.added === true).map(item => item.value))
   state.diff.removed = [].concat(...changes.filter(item => item.removed === true).map(item => item.value))
   return state
@@ -66,7 +66,7 @@ const diffVersions = (state) => {
 
 const save = (year, data) => { // eslint-disable-line no-unused-vars
   return new Promise((resolve, reject) => {
-    fs.writeFile('/tmp/result.json', JSON.stringify(data, null, 2), (err) => {
+    writeFile('/tmp/result.json', JSON.stringify(data, null, 2), (err) => {
       if (err) {
         reject(err)
       }

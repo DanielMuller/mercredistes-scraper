@@ -1,8 +1,8 @@
 'use strict'
-const AWS = require('aws-sdk')
-const lambda = new AWS.Lambda({ region: process.env.AWS_REGION })
+import { Lambda } from 'aws-sdk'
+const lambda = new Lambda({ region: process.env.AWS_REGION })
 
-exports.handler = async function (event, context) {
+export async function handler (event, context) {
   if (!event.queryStringParameters) {
     return redirectResponse(event)
   }

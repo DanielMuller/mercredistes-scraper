@@ -1,6 +1,5 @@
 service: mercredistes-scraper
-frameworkVersion: "3.22.0"
-variablesResolutionMode: 20210326
+frameworkVersion: "3.24.1"
 
 custom:
   stage: ${file(stages/${opt:stage, self:provider.stage}.yml)}
@@ -17,15 +16,14 @@ package:
 
 provider:
   name: aws
-  lambdaHashingVersion: 20201221
   runtime: nodejs16.x
   logRetentionInDays: ${self:custom.stage.lambda.logRetention}
-  httpApi:
-    useProviderTags: true
-  stage: dev
+  stage: ${opt:stage, 'dev'}
   region: ${opt:region, self:custom.stage.region}
   profile: ${self:custom.stage.profile}
-  iamRoleStatements: ${file(config/iamRoleStatements.yml)}
+  iam:
+    role:
+      statements: ${file(config/iamRoleStatements.yml)}
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
     tags:

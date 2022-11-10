@@ -10,6 +10,7 @@ const GITHUB_USERNAME = process.env.GITHUB_USERNAME
 const GITHUB_REPO = process.env.GITHUB_REPO
 
 export async function handler (event) {
+  console.log('Event', JSON.stringify(event, null, 2))
   const year = parseInt(event.year)
   const state = {
     year,

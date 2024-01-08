@@ -1,4 +1,3 @@
-'use strict'
 import { Lambda } from 'aws-sdk'
 const lambda = new Lambda({ region: process.env.AWS_REGION })
 

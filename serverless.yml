@@ -1,5 +1,5 @@
 service: mercredistes-scraper
-frameworkVersion: "3.24.1"
+frameworkVersion: "3.38.0"
 
 custom:
   stage: ${file(stages/${opt:stage, self:provider.stage}.yml)}
@@ -16,7 +16,7 @@ package:
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   logRetentionInDays: ${self:custom.stage.lambda.logRetention}
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, self:custom.stage.region}

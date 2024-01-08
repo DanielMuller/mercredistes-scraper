@@ -1,5 +1,3 @@
-'use strict'
-
 import { writeFile } from 'fs'
 import got from 'got'
 import listing from '../lib/listing'

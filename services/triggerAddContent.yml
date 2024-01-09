@@ -3,7 +3,7 @@ name: ${self:service}-triggerAddContent${self:custom.stage.extension}
 memorySize: 128
 timeout: 10
 environment:
-  year: 2023
+  year: 2024
   functionName: ${self:service}-addContent${self:custom.stage.extension}
 tags:
   service: api

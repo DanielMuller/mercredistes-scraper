@@ -1,12 +1,12 @@
 service: mercredistes-scraper
-frameworkVersion: "3.38.0"
+frameworkVersion: "3.40.0"
 
 custom:
   stage: ${file(stages/${opt:stage, self:provider.stage}.yml)}
   webpack:
     includeModules:
       forceExclude:
-        - aws-sdk
+        - "@aws-sdk/*"
 
 plugins:
   - serverless-webpack

@@ -1,0 +1,8 @@
+
+Packaging mercredistes-scraper for stage dev (eu-central-1)
+Warning: More than one matching handlers found for "services/addContent". Using "services/addContent.js"
+Warning: More than one matching handlers found for "services/triggerAddContent". Using "services/triggerAddContent.js"
+Package lock found - Using locked versions
+Packing external modules: @aws-sdk/client-lambda@^3.0.0, diff@5.1.0, got@11.8.6, metascraper-image@5.43.1, metascraper@5.43.2, sync-request@6.1.0
+
+✔ Service packaged (53s)

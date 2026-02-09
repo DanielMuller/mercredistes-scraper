@@ -1,5 +1,5 @@
-import { Lambda } from 'aws-sdk'
-const lambda = new Lambda({ region: process.env.AWS_REGION })
+import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda'
+const lambdaClient = new LambdaClient({ region: process.env.AWS_REGION })
 
 export async function handler (event, context) {
   if (!event.queryStringParameters) {
@@ -26,7 +26,8 @@ export async function handler (event, context) {
     InvocationType: 'Event',
     Payload: JSON.stringify(payload)
   }
-  const invoke = await lambda.invoke(params).promise()
+  const invokeCommand = new InvokeCommand(params)
+  const invoke = await lambdaClient.send(invokeCommand)
   console.log(invoke)
 
   return {

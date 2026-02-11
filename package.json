@@ -27,7 +27,7 @@
     "lodash": "4.17.23",
     "serverless": "3.40.0",
     "serverless-webpack": "5.13.0",
-    "webpack": "5.94.0",
+    "webpack": "5.105.1",
     "webpack-node-externals": "3.0.0"
   },
   "dependencies": {

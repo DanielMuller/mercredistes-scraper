@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-lambda": "^3.0.0",
-    "diff": "5.1.0",
+    "diff": "5.2.2",
     "got": "11.8.6",
     "image-downloader": "4.3.0",
     "lambda-log": "3.1.0",

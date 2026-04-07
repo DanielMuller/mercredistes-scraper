@@ -9,7 +9,7 @@ events:
       rate: cron(25 4 * * ? *)
       enabled: true
       input:
-        year: "2025"
+        year: "2026"
 environment:
   GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token, env:GOOGLE_ACCESS_TOKEN, 'PLACEHOLDER_GOOGLE_TOKEN'}
   GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token, env:GITHUB_ACCESS_TOKEN, 'PLACEHOLDER_GITHUB_TOKEN'}

@@ -1,5 +1,6 @@
 profile: mesphotos
 region: eu-central-1
+accountId: ${env:AWS_ACCOUNT_ID, aws:accountId}
 extension: "-dev"
 ## Add any additional stage related variables. You can re-use the definition in serverless.yml:custom
 # customStageVar: customStageValue

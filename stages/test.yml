@@ -1,11 +1,13 @@
-profile: mesphotos
+profile: localtest
 region: eu-central-1
-accountId: ${env:AWS_ACCOUNT_ID, aws:accountId}
-extension: ""
+accountId: "000000000000"
+extension: "-test"
+googleAccessToken: PLACEHOLDER_GOOGLE_TOKEN
+githubAccessToken: PLACEHOLDER_GITHUB_TOKEN
 ## Add any additional stage related variables. You can re-use the definition in serverless.yml:custom
 # customStageVar: customStageValue
 ## Default Lambda related configs. Can be overwritten in each function
 lambda:
   memorySize: 2048
   timeout: 900
-  logRetention: 14
+  logRetention: 1

@@ -11,8 +11,8 @@ events:
       input:
         year: "2026"
 environment:
-  GOOGLE_ACCESS_TOKEN: ${ssm:mercredistes-google-token, env:GOOGLE_ACCESS_TOKEN, 'PLACEHOLDER_GOOGLE_TOKEN'}
-  GITHUB_ACCESS_TOKEN: ${ssm:mercredistes-github-token, env:GITHUB_ACCESS_TOKEN, 'PLACEHOLDER_GITHUB_TOKEN'}
+  GOOGLE_ACCESS_TOKEN: ${self:custom.stage.googleAccessToken, env:GOOGLE_ACCESS_TOKEN, ssm:mercredistes-google-token, 'PLACEHOLDER_GOOGLE_TOKEN'}
+  GITHUB_ACCESS_TOKEN: ${self:custom.stage.githubAccessToken, env:GITHUB_ACCESS_TOKEN, ssm:mercredistes-github-token, 'PLACEHOLDER_GITHUB_TOKEN'}
   GITHUB_USERNAME: DanielMuller
   GITHUB_REPO: mercredistes.mesphotos.ch
   GITHUB_COMMIT_EMAIL: mercredistes-scraper@mesphotos.ch

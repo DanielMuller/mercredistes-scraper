@@ -7,10 +7,13 @@ Edit *config/dev.yml* and *config/production.yml* to suit your needs.
 Run `nvm use` to load the right node version and `npm install` to install all the dependencies.
 
 ## Deploy
-`sls deploy` (development) or `sls -s production deploy`
+Serverless Framework v4 requires authentication before deploy/package commands.
+Run `npx sls login` once locally, or set `SERVERLESS_ACCESS_KEY` (CI) / `SERVERLESS_LICENSE_KEY` in your environment.
 
-### Webpack
-Webpack will automatically bundle only the used dependencies and create a unique and smaller bundle for each function.
+Use `sls deploy --stage dev` (development) or `sls deploy --stage production`.
+
+### Esbuild
+Serverless Framework v4 built-in esbuild bundles only used dependencies and creates a smaller bundle for each function.
 
 ## Logging
 [lambda-log](https://www.npmjs.com/package/lambda-log) provides a more structured way of logging:

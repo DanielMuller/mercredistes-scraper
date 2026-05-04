@@ -4,9 +4,59 @@
 node_modules
 jspm_packages
 
-# Serverless directories
-.serverless
-# Webpack folder
-.webpack
-.esbuild
-build.log
+# CDK asset directory (produced on cdk synth, and must not be version controlled)
+cdk.out/
+dist/
+
+# Parcel related files
+.cache
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Misc
+*.log
+*.swp
+*.swo
+*~
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Mac files
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*#
+
+# TypeScript
+*.js
+*.d.ts
+!cdk.js
+!cdk.ts
+!eslint.config.js
+!services/*.js
+!lib/*.js
+*.js.map
+
+# Build output
+build/
+out/

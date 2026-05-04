@@ -1,0 +1,59 @@
+{
+  "app": "npx ts-node cdk.ts",
+  "watch": {
+    "include": ["**"],
+    "exclude": [
+      "README.md",
+      "CDK_MIGRATION.md",
+      "CLOUDFORMATION_COMPARISON.md",
+      "cdk*.json",
+      "package*.json",
+      ".git",
+      "node_modules",
+      ".venv",
+      "venv",
+      "dist",
+      ".env",
+      "eslint.config.js",
+      "tsconfig.json",
+      ".editorconfig"
+    ]
+  },
+  "context": {
+    "dev": {
+      "profile": "mesphotos",
+      "region": "eu-central-1",
+      "accountId": "${env:AWS_ACCOUNT_ID}",
+      "extension": "-dev",
+      "lambda": {
+        "memorySize": 2048,
+        "timeout": 900,
+        "logRetention": 1
+      }
+    },
+    "production": {
+      "profile": "mesphotos",
+      "region": "eu-central-1",
+      "accountId": "${env:AWS_ACCOUNT_ID}",
+      "extension": "",
+      "lambda": {
+        "memorySize": 2048,
+        "timeout": 900,
+        "logRetention": 14
+      }
+    },
+    "test": {
+      "profile": "localtest",
+      "region": "eu-central-1",
+      "accountId": "000000000000",
+      "extension": "-test",
+      "googleAccessToken": "PLACEHOLDER_GOOGLE_TOKEN",
+      "githubAccessToken": "PLACEHOLDER_GITHUB_TOKEN",
+      "lambda": {
+        "memorySize": 2048,
+        "timeout": 900,
+        "logRetention": 1
+      }
+    }
+  }
+}

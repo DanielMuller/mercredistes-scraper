@@ -3,7 +3,13 @@ const globals = require("globals");
 
 module.exports = [
   {
-    ignores: ["node_modules/**", ".serverless/**", ".webpack/**"],
+    ignores: [
+      "node_modules/**",
+      ".serverless/**",
+      ".webpack/**",
+      "cdk.out/**",
+      "dist/**",
+    ],
   },
   js.configs.recommended,
   {

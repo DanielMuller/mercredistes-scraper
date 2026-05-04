@@ -1,14 +1,18 @@
 {
   "name": "mercredistes-scraper",
   "version": "0.0.1",
-  "description": "Change name and description",
-  "main": "handler.js",
+  "description": "Mercredistes content scraper - AWS Lambda with CDK",
+  "main": "dist/cdk.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint .",
     "lintfix": "eslint --fix",
-    "deploy": "npm run lint && sls deploy --stage production",
-    "dev": "npm run lint && sls deploy --stage dev"
+    "cdk": "cdk",
+    "cdk:deploy": "npm run lint && cdk deploy --context stage=production",
+    "cdk:dev": "npm run lint && cdk deploy --context stage=dev",
+    "cdk:test": "npm run lint && cdk deploy --context stage=test",
+    "cdk:synth": "cdk synth",
+    "cdk:diff": "cdk diff"
   },
   "author": "",
   "license": "ISC",
@@ -17,15 +21,20 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@types/aws-lambda": "^8.10.161",
+    "@types/diff": "^5.0.2",
+    "@types/node": "^20.10.0",
+    "aws-cdk": "^2.174.0",
+    "aws-cdk-lib": "^2.174.0",
+    "constructs": "^10.0.0",
     "eslint": "10.3.0",
     "globals": "17.6.0",
-    "js-yaml": "4.1.1",
-    "lodash": "4.18.1",
-    "serverless": "4.35.0"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   },
   "dependencies": {
-    "@aws-sdk/client-lambda": "3.895.0",
-    "diff": "9.0.0",
-    "lambda-log": "3.1.0"
+    "@aws-sdk/client-lambda": "^3.895.0",
+    "@aws-sdk/core": "^3.895.0",
+    "diff": "^9.0.0"
   }
 }

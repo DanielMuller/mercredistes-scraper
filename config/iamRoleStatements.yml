@@ -1,4 +1,0 @@
-- Effect: "Allow"
-  Action:
-    - "lambda:InvokeFunction"
-  Resource: arn:aws:lambda:${self:provider.region}:${self:custom.stage.accountId}:function:${self:service}-addContent${self:custom.stage.extension}

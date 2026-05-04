@@ -1,34 +1,86 @@
 # Mercredistes Scraper
 Lambda functions that fetches the latest entries in a Google Spreadsheet and pushes updates to a [Hugo](https://gohugo.io) data set in [git](https://github.com/DanielMuller/mercredistes.mesphotos.ch).
 
-### Configuration
-Edit *config/dev.yml* and *config/production.yml* to suit your needs.
+## Setup
+Run the following once after cloning:
 
-Run `nvm use` to load the right node version and `npm install` to install all the dependencies.
+```bash
+nvm use
+npm install
+```
 
-## Deploy
-Serverless Framework v4 requires authentication before deploy/package commands.
-Run `npx sls login` once locally, or set `SERVERLESS_ACCESS_KEY` (CI) / `SERVERLESS_LICENSE_KEY` in your environment.
+## Configuration
+Stage-specific infrastructure config is defined in cdk.json under:
 
-Use `sls deploy --stage dev` (development) or `sls deploy --stage production`.
+- dev
+- production
+- test
 
-### Esbuild
-Serverless Framework v4 built-in esbuild bundles only used dependencies and creates a smaller bundle for each function.
+Runtime secrets and tokens are read from environment variables.
 
-## Logging
-[lambda-log](https://www.npmjs.com/package/lambda-log) provides a more structured way of logging:
-```javascript
-const log = require('lambda-log')
-log.info('Log Tag', {key1: value1, key2: value2})
+## Deploy (AWS CDK)
+This project deploys with AWS CDK (not Serverless Framework).
+
+### 1. Export required environment variables
+
+```bash
+export AWS_ACCOUNT_ID=123456789012
+export GITHUB_ACCESS_TOKEN=...
+export GOOGLE_ACCESS_TOKEN=...
+export TRIGGER_TOKEN=...
 ```
-Which will result in:
+
+Optional overrides:
+
+```bash
+export GITHUB_USERNAME=DanielMuller
+export GITHUB_REPO=mercredistes.mesphotos.ch
+export GITHUB_COMMIT_EMAIL=mercredistes-scraper@mesphotos.ch
+export GITHUB_COMMIT_USER="Mercredistes Scraper"
 ```
-{"_logLevel":"info","msg":"Log Tag","key1":"value1","key2":"value2","_tags":["log","info"]}
+
+### 2. Bootstrap CDK (one-time per account/region)
+
+```bash
+npx cdk bootstrap aws://$AWS_ACCOUNT_ID/eu-central-1
 ```
-You can also add meta data by default:
+
+### 3. Validate before deploy
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm run cdk:synth -- --context stage=test
 ```
-log.options.meta.fct = 'fctName'
-log.options.meta.requestId = event.requestContext.requestId
-log.options.meta.path = event.path
-log.options.meta.sourceIp = event.requestContext.identity.sourceIp
+
+### 4. Deploy to a stage
+
+Development:
+
+```bash
+npm run cdk:dev
 ```
+
+Production:
+
+```bash
+npm run cdk:deploy
+```
+
+Test:
+
+```bash
+npm run cdk:test
+```
+
+### 5. Useful commands
+
+```bash
+# Compare local stack with deployed stack
+npm run cdk:diff -- --context stage=dev
+
+# Synthesize CloudFormation for a specific stage
+npm run cdk:synth -- --context stage=production
+```
+
+Note: the stage is passed as CDK context using --context stage=<name>, not --stage.

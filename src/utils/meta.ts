@@ -1,3 +1,11 @@
+interface StateData {
+  diff: { added: string[] };
+  newList: Record<
+    string,
+    { date: string; url: string; image?: string; srcImage?: string }
+  >;
+}
+
 const imageMetaKeys = new Set([
   "og:image",
   "og:image:url",
@@ -6,30 +14,32 @@ const imageMetaKeys = new Set([
   "image",
 ]);
 
-export default (state) => {
-  const getImageUrlPromises = [];
-  const dataList = {};
+export default (state: StateData): Promise<StateData> => {
+  const getImageUrlPromises: Array<Promise<[string, string | null]>> = [];
+  const dataList: Record<string, unknown> = {};
   state.diff.added.forEach((key) => {
     state.newList[key].image = setImagePath(state.newList[key]);
     dataList[key] = state.newList[key];
   });
   Object.keys(dataList).forEach((key) => {
-    const item = dataList[key];
+    const item = state.newList[key];
     const getImageUrlPromise = getImageUrl(item.url).then((image) => {
-      return [key, image];
+      return [key, image] as [string, string | null];
     });
     getImageUrlPromises.push(getImageUrlPromise);
   });
   return Promise.all(getImageUrlPromises).then((results) => {
     results.forEach((item) => {
       const [key, image] = item;
-      state.newList[key].srcImage = image;
+      if (image) {
+        state.newList[key].srcImage = image;
+      }
     });
     return state;
   });
 };
 
-const setImagePath = (item) => {
+const setImagePath = (item: { date: string; url: string }): string => {
   const [year] = item.date.split("-");
   return (
     "images/" +
@@ -44,7 +54,7 @@ const setImagePath = (item) => {
   );
 };
 
-const decodeHtmlEntities = (value) => {
+const decodeHtmlEntities = (value: string): string => {
   if (!value || !value.includes("&")) {
     return value;
   }
@@ -61,8 +71,8 @@ const decodeHtmlEntities = (value) => {
     );
 };
 
-const parseAttributes = (tag) => {
-  const attributes = {};
+const parseAttributes = (tag: string): Record<string, string> => {
+  const attributes: Record<string, string> = {};
   const attributePattern =
     /([a-zA-Z_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
   let match = attributePattern.exec(tag);
@@ -77,7 +87,10 @@ const parseAttributes = (tag) => {
   return attributes;
 };
 
-const toAbsoluteUrl = (pageUrl, value) => {
+const toAbsoluteUrl = (
+  pageUrl: string,
+  value: string | undefined,
+): string | null => {
   if (!value || value.startsWith("data:") || value.startsWith("javascript:")) {
     return null;
   }
@@ -89,7 +102,7 @@ const toAbsoluteUrl = (pageUrl, value) => {
   }
 };
 
-const findMetaImage = (html, pageUrl) => {
+const findMetaImage = (html: string, pageUrl: string): string | null => {
   const metaTags = html.match(/<meta\b[^>]*>/gi) || [];
 
   for (const tag of metaTags) {
@@ -107,7 +120,7 @@ const findMetaImage = (html, pageUrl) => {
   return null;
 };
 
-const findLinkImage = (html, pageUrl) => {
+const findLinkImage = (html: string, pageUrl: string): string | null => {
   const linkTags = html.match(/<link\b[^>]*>/gi) || [];
 
   for (const tag of linkTags) {
@@ -124,7 +137,7 @@ const findLinkImage = (html, pageUrl) => {
   return null;
 };
 
-const findImgFallback = (html, pageUrl) => {
+const findImgFallback = (html: string, pageUrl: string): string | null => {
   const imgTags = html.match(/<img\b[^>]*>/gi) || [];
 
   for (const tag of imgTags) {
@@ -140,7 +153,7 @@ const findImgFallback = (html, pageUrl) => {
   return null;
 };
 
-const extractImageUrl = (html, pageUrl) => {
+const extractImageUrl = (html: string, pageUrl: string): string | null => {
   return (
     findMetaImage(html, pageUrl) ||
     findLinkImage(html, pageUrl) ||
@@ -148,7 +161,7 @@ const extractImageUrl = (html, pageUrl) => {
   );
 };
 
-const getImageUrl = (pageUrl) => {
+const getImageUrl = (pageUrl: string): Promise<string | null> => {
   return fetch(pageUrl)
     .then((response) => {
       if (!response.ok) {
@@ -158,5 +171,5 @@ const getImageUrl = (pageUrl) => {
         return extractImageUrl(html, response.url);
       });
     })
-    .catch();
+    .catch(() => null);
 };
